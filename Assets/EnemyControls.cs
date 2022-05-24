@@ -6,21 +6,26 @@ public class EnemyControls : MonoBehaviour
 
     [SerializeField]
     private float speed;
-
     [SerializeField]
     private float rotateSpeed = 1;
-
     [SerializeField]
     private int health;
+    [SerializeField]
+    public int pointValue;
+
+    public Vector3 startPos;
 
     private bool dead;
-
     private bool isPlaying;
 
     [SerializeField]
     private GameObject gun;
     [SerializeField]
     private GameObject bullet;
+    [SerializeField]
+    public bool gunActive = true;
+    [SerializeField]
+    private float bulletSpeed;
 
     public bool enemyActive; //active on screen
 
@@ -38,18 +43,26 @@ public class EnemyControls : MonoBehaviour
     private bool invincible;
     private float takeDamageInvincibilityTime = 0.1f;
     private int damage;
+    public bool isMoving = false;
+    private bool hasFired = false;
+
+    public ParticleSystem deathParticles;
+
+    private AudioSource _audio;
+    public AudioClip hitSound, deathSound;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        health = 3;
         isPlaying = true;
         weaponAction = GetComponent<WeaponAction>();
         characterMovement = GetComponent<CharacterMovement>();
         damageController = GetComponent<DamageController>();
         targetPlayer = GetComponentInChildren<RotateTowardsPlayer>();
         playerController = FindObjectOfType<PlayerController>();
+        _audio = GetComponent<AudioSource>();
+        startPos = transform.position;
     }
 
     void Update()
@@ -59,18 +72,33 @@ public class EnemyControls : MonoBehaviour
             if (gameObject.name.Contains("Tank"))
             {
                 characterMovement.MoveForward(speed);
+                if(targetPlayer !=null)
                 targetPlayer.TargetPlayer(rotateSpeed);
-            }else
-
-            if(gameObject.name.Contains("Flyer"))
-            {
-                Debug.Log("Forward!");
-                characterMovement.sMovement(speed);
             }
 
-            if (nextShotTime<= Time.time && gun != null && bullet !=null)
+            if(gameObject.name.Contains("S-Flyer"))
             {
-                weaponAction.Shoot(bullet, gun);
+                characterMovement.sMovement(speed);
+            }
+            if (gameObject.name.Contains("Sin"))
+            {
+                characterMovement.SinMovement(speed, startPos);
+            }
+           if (gameObject.name.Contains("Missile") && isMoving)
+            {
+                GetComponentInChildren<CharacterMovement>().LocalMoveForward(speed);
+            }
+
+            /*if(gameObject.name.Contains("Missile") && gunActive && !hasFired)
+            {
+                Debug.Log("fire!");
+                weaponAction.LaunchChild(bullet, gun, bulletSpeed);
+                hasFired = true;
+                gunActive = false;
+            } */
+            if (nextShotTime<= Time.time && gun != null && bullet !=null && gunActive == true)
+            {
+                weaponAction.Shoot(bullet, gun, bulletSpeed);
                 nextShotTime = Time.time + coolDownTime;
             }
 
@@ -98,6 +126,8 @@ public class EnemyControls : MonoBehaviour
         if (health > 0 && !invincible)
         {
             damageController.FlashRed(takeDamageInvincibilityTime);
+            _audio.clip = hitSound;
+            _audio.Play();
             invincible = true;
             StartCoroutine("InvincibilityTime", takeDamageInvincibilityTime);
             health -= damage;
@@ -105,8 +135,7 @@ public class EnemyControls : MonoBehaviour
 
         if (health <= 0 && !dead)
         {
-            playerController.streak++;
-            playerController.points++;
+
             HasDied();
         }
     }
@@ -116,16 +145,29 @@ public class EnemyControls : MonoBehaviour
         if (gameObject.CompareTag("Player"))
         {
             dead = true;
+            _audio.PlayOneShot(deathSound);
             //explosion animation
             //stop camera movement
             //pause game
             //death screen
-            Destroy(gameObject);
+            Destroy(gameObject,.05f);
         }
         if (gameObject.CompareTag("Enemy"))
         {
+            playerController.streak++;
+            PlayerController.points += pointValue;
+            //enemyActive = false;
             //explostion animation
-            Destroy(gameObject);
+            int childs = transform.childCount;
+            for (int i = childs - 1; i >= 0; i--)
+            {
+                Destroy(transform.GetChild(i).gameObject);
+            }
+            if (childs <= 0)
+            {
+                _audio.PlayOneShot(deathSound);
+                Destroy(gameObject, 1.0f);
+            }
         }
     }
 

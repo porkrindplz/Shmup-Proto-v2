@@ -4,19 +4,33 @@ using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
 {
+    public float formationPosition;
+    private float xMove;
+
+    private void Awake()
+    {
+
+            xMove = -formationPosition;
+    }
     public void MoveForward(float speed)
     {
+
         if (gameObject.CompareTag("Player"))
         {
             Vector3 forward = Vector3.forward * speed * Time.deltaTime;
             transform.localPosition += forward;
         }
-            else//if (gameObject.name.Contains("Tank"))
+            else
         {
             Vector3 forward = transform.forward * speed * Time.deltaTime;
             transform.position += forward;
         }
 
+    }    
+    public void LocalMoveForward(float speed)
+    {
+            Vector3 forward = transform.forward * speed * Time.deltaTime;
+            transform.localPosition += forward;
     }
     public void MoveLeft(float speed)
     {
@@ -35,11 +49,14 @@ public class CharacterMovement : MonoBehaviour
     }
 
     public void sMovement(float speed)
-    {
-        Vector3 pos = transform.localPosition;
-        Vector3 curveRight = Vector3.right;
+    { 
         MoveForward(speed);
-    
+    }
 
+    public void SinMovement(float speed, Vector3 startPos)
+    {
+        //Vector3 sinMov = startPos + new Vector3((Mathf.Sin(Time.time)+(startPos.z-transform.position.z)) * speed, 0, 1);
+        Vector3 sinMov = startPos + new Vector3(Mathf.Sin(Time.time+xMove) * speed, 0, .5f*speed);
+        transform.position = sinMov;
     }
 }

@@ -10,19 +10,23 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     public int health;
     [SerializeField]
-    public int points;
+    public static int points;
     [SerializeField]
     public int streak;
     [SerializeField]
     public float timer;
-
     [SerializeField]
     public float winstreak;
-
     [SerializeField]
-    public float speed;    
+    public float speed;   
+    [SerializeField]
+    public bool isPlaying;
 
-    private bool isPlaying;
+    public float startStreak = 10;
+    public float secondStreak = 20;
+    public float incrementalStreak;
+
+
     private bool invincible;
     private float startingInvincibilityTime = 2;
     private float takeDamageInvincibilityTime = 1;
@@ -31,13 +35,15 @@ public class PlayerController : MonoBehaviour
     private GameObject gunMid;
     [SerializeField]
     private GameObject bulletMid;
-    private bool gunSidesActive;
+    public static bool gunSidesActive;
     [SerializeField]
     private GameObject gunR;
     [SerializeField]
     private GameObject gunL;
     [SerializeField]
     private GameObject bulletSides;
+    [SerializeField]
+    private float bulletSpeed;
 
     private int damage;
 
@@ -45,7 +51,17 @@ public class PlayerController : MonoBehaviour
     private CharacterMovement characterMovement;
     private DamageController damageController;
 
+    [SerializeField]
+    private GameObject weaponUpgrade;
+    [SerializeField]
+    private GameObject shieldUpgrade;
+    [SerializeField]
+    public bool shieldActive;
+    private ParticleSystem shieldEffect;
 
+    private bool upgradeSpawned;
+    private bool upgrade2Spawned;
+    public bool autoFire;
 
     private void Awake()
     {
@@ -56,14 +72,15 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         invincible = true;
-        Debug.Log("invincible - true? " + invincible);
         ResetHealth();
         isPlaying = true;
-        gunSidesActive = true;
         weaponAction = GetComponent<WeaponAction>();
         characterMovement = GetComponent<CharacterMovement>();
         damageController = GetComponent<DamageController>();
+        shieldEffect = GetComponent<ParticleSystem>();
         StartCoroutine("InvincibilityTime", startingInvincibilityTime);
+        ResetStreakGoal();
+        shieldEffect.Clear();
     }
 
     // Update is called once per frame
@@ -92,26 +109,73 @@ public class PlayerController : MonoBehaviour
             }
 
             //Attack Controls
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKey(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKey(KeyCode.Space) && autoFire)
             {
-                weaponAction.Shoot(bulletMid, gunMid);
+                weaponAction.Shoot(bulletMid, gunMid, bulletSpeed);
                 if (gunSidesActive)
                 {
-                    weaponAction.Shoot(bulletSides, gunL);                    
-                    weaponAction.Shoot(bulletSides, gunR);
+                    weaponAction.Shoot(bulletSides, gunL, bulletSpeed);                    
+                    weaponAction.Shoot(bulletSides, gunR, bulletSpeed);
                 }
             }
+            //ITEM UPGRADE
+            if(!gunSidesActive && !shieldActive && streak >=startStreak && !upgradeSpawned)
+            {
+                Instantiate(weaponUpgrade, new Vector3(-5, transform.position.y, transform.position.z + 20), transform.rotation);
+                Instantiate(shieldUpgrade, new Vector3(5, transform.position.y, transform.position.z + 20), transform.rotation);
+                upgradeSpawned = true;
+            } else if(!gunSidesActive && !shieldActive && streak >=incrementalStreak && upgradeSpawned && !upgrade2Spawned){
+                Instantiate(weaponUpgrade, new Vector3(-5, transform.position.y, transform.position.z + 20), transform.rotation);
+                Instantiate(shieldUpgrade, new Vector3(5, transform.position.y, transform.position.z + 20), transform.rotation);
+                upgrade2Spawned = true;
+                IncreaseStreakGoal();
+
+            }
+            else if (!gunSidesActive && shieldActive && streak >=incrementalStreak && upgradeSpawned && !upgrade2Spawned)
+            {
+                Instantiate(weaponUpgrade, new Vector3(0, transform.position.y, transform.position.z + 20), transform.rotation);
+                upgrade2Spawned = true;
+                IncreaseStreakGoal();
+            }
+            else if (gunSidesActive && !shieldActive && streak >=incrementalStreak && upgradeSpawned && !upgrade2Spawned)
+            {
+                Instantiate(shieldUpgrade, new Vector3(0, transform.position.y, transform.position.z + 20), transform.rotation);
+                upgrade2Spawned = true;
+                IncreaseStreakGoal();
+            }
+
+            if (shieldActive)
+            {
+                Debug.Log("SHIELD");
+                if (shieldEffect.isStopped)
+                {
+                    shieldEffect.Play();
+                }
+            }
+            if (health <= 0)
+            {
+                HasDied();
+            }
         }
+
+
+
     }
 
     private void OnTriggerEnter(Collider other)
+    {
+        TriggerHit(other);
+    }
+
+    public void TriggerHit(Collider other)
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
             if (other.transform.parent != null)
             {
                 damage = other.gameObject.transform.parent.GetComponent<DamageController>().damage;
-            }else
+            }
+            else
             {
                 damage = other.gameObject.transform.GetComponent<DamageController>().damage;
             }
@@ -127,16 +191,25 @@ public class PlayerController : MonoBehaviour
     {
         if (health > 0 && !invincible)
         {
-            health -= damage;
-            ResetStreak();
-            damageController.FlashRed(takeDamageInvincibilityTime);
-            invincible = true;
-            StartCoroutine("InvincibilityTime", takeDamageInvincibilityTime);
-        }
+            if (shieldActive)
+            {
+                //deactivate shield
+                shieldActive = false;
+                if (shieldEffect.isPlaying)
+                {
+                    shieldEffect.Stop();
+                }
+                upgrade2Spawned = false;
 
-        if (health <= 0)
-        {
-            HasDied();
+            }
+            else
+            {
+                health -= damage;
+                ResetStreak();
+                damageController.FlashRed(takeDamageInvincibilityTime);
+                invincible = true;
+                StartCoroutine("InvincibilityTime", takeDamageInvincibilityTime);
+            }
         }
     }
 
@@ -151,6 +224,7 @@ public class PlayerController : MonoBehaviour
             //pause game
             //death screen
             Destroy(gameObject);
+            pauseMenu.isGameOver = true;
         }
         if (gameObject.CompareTag("Enemy"))
         {
@@ -166,6 +240,7 @@ public class PlayerController : MonoBehaviour
     public void ResetStreak()
     {
         streak = 0;
+        ResetStreakGoal();
     }
     public void ResetTimer()
     {
@@ -176,5 +251,35 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         invincible = false;
+    }
+
+    public void ActivateGunSides()
+    {
+        gunSidesActive = true;
+    }
+
+    public void IncreaseStreakGoal()
+    {
+        incrementalStreak += secondStreak;
+    }
+    public void ResetStreakGoal()
+    {
+        incrementalStreak = secondStreak;
+    }
+    public static void PointsRising(int pointsTotal, int increments)
+    {
+
+
+    }
+
+    public IEnumerator PointUp(int pointsTotal, int increments)
+    {
+        int pointCount = Mathf.RoundToInt(pointsTotal / increments);
+        for (int i = pointCount; i > 0; i--)
+        {
+            points += increments;
+            yield return new WaitForSeconds(.01f);
+        }
+
     }
 }

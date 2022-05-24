@@ -16,15 +16,12 @@ public class TimerOverlay : MonoBehaviour
     void Start()
     {
         playerController = FindObjectOfType<PlayerController>();
-
-
         statsDisplay = GetComponent<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
         timer = playerController.timer;
         statsDisplay.text = Mathf.RoundToInt(timer).ToString();
     }

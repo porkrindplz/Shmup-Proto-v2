@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ProjectileBasic : MonoBehaviour
 {
-    [SerializeField] private float projectileSpeed = 20f;
+    [SerializeField] public float projectileSpeed = 20f;
 
     [SerializeField] private float range = 10;
 
@@ -21,6 +21,7 @@ public class ProjectileBasic : MonoBehaviour
 
     void Update()
     {
+
         if (gameObject.CompareTag("Player") && FindObjectOfType<PlayerController>() != null)
         {
             playerSpeed = FindObjectOfType<PlayerController>().speed;

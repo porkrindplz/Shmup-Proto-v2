@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - TriggerCam
   - IgnoreParent
+  - Item
   layers:
   - Default
   - TransparentFX

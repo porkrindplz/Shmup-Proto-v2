@@ -22,13 +22,15 @@ public class RotateTowardsPlayer : MonoBehaviour
 
     public void TargetPlayer(float rotationSpeed)
     {
-        if (player != null)
+        if (player != null && gameObject !=null)
         {
             playerGroundPos = new Vector3(player.position.x, player.position.y, player.position.z);
+
             playerDir = playerGroundPos - transform.position;
             rotationStep = rotationSpeed * Time.deltaTime;
             Vector3 newLookDir = Vector3.RotateTowards(transform.forward, playerDir, rotationStep, 0f);
             transform.rotation = Quaternion.LookRotation(newLookDir);
+            transform.localEulerAngles = new Vector3(0,transform.localEulerAngles.y,0);
         }
     }
 }

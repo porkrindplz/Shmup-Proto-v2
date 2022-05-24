@@ -27,7 +27,7 @@ public class DamageController : MonoBehaviour
         {
 
                 children[i] = transform.GetChild(i);
-            if (children[i].GetComponent<MeshRenderer>() != null)
+            if (children[i].GetComponent<MeshRenderer>() != null && children[i].GetComponent<MeshRenderer>().material.HasProperty("_Color"))
             {
                 originalColor[i] = children[i].GetComponent<MeshRenderer>().material.color;
             }

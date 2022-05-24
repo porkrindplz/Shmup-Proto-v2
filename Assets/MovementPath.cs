@@ -5,7 +5,9 @@ using UnityEngine;
 public class MovementPath : MonoBehaviour
 {
     [SerializeField]
-    private float speed;
+    public float speed;
+
+    public bool isMoving;
 
     private CharacterMovement characterMovement;
 
@@ -18,6 +20,9 @@ public class MovementPath : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        characterMovement.MoveForward(speed);
+        if (isMoving)
+        {
+            characterMovement.MoveForward(speed);
+        }
     }
 }
