@@ -6,27 +6,23 @@ public class bossController : MonoBehaviour
 {
     [SerializeField]
     private float forwardSpeed;
-
     [SerializeField]
     private float strafeSpeed;
-
     [SerializeField]
     private float rotateSpeed = 1;
-
     [SerializeField]
     private int health;
     [SerializeField]
     private int lowHealth;
-
     [SerializeField]
     public int pointValue;
 
     private bool dead;
     private bool isPlaying;
     public bool enemyActive; //active on screen
+
     [SerializeField]
     private bool _isEndBoss;
-
     [SerializeField]
     private GameObject gunMid;
     [SerializeField]
@@ -38,7 +34,6 @@ public class bossController : MonoBehaviour
     [SerializeField]
     private float midCoolDownTime;
     private float midNextShotTime;
-
     [SerializeField]
     private GameObject gunL;
     [SerializeField]
@@ -62,6 +57,8 @@ public class bossController : MonoBehaviour
     [SerializeField]
     private float rCoolDownTime;
     private float rNextShotTime;
+    public GameObject bodyToExplode;
+    public GameObject[] objectToDestroy;
 
     private WeaponAction weaponAction;
     private RotateTowardsPlayer targetPlayer;
@@ -90,7 +87,7 @@ public class bossController : MonoBehaviour
     private int numOfChildren;
     private GameObject children;
 
-    private AudioSource _audio;
+    public AudioSource _audio;
     public AudioClip hitSound, deathSound;
     
 
@@ -229,12 +226,15 @@ public class bossController : MonoBehaviour
 
             if (_isEndBoss)
             {
-                PlayerWins();
+                StartCoroutine(playerController.PointUp(5000, 10));
+                Instantiate(deathParticles, bodyToExplode.transform.position, Quaternion.identity);
+                for (int i = 0; i < objectToDestroy.Length; i++)
+                {
+                    Destroy(objectToDestroy[i]);
+                }
+                StartCoroutine("WaitTime", 3);
             }
-            StartCoroutine(playerController.PointUp(5000, 250));
-            Instantiate(deathParticles, transform.position, Quaternion.identity);
 
-            Destroy(gameObject, .1f);
         }
     }
 
@@ -242,6 +242,14 @@ public class bossController : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         invincible = false;
+    }
+
+    IEnumerator WaitTime(float time)
+    {
+        yield return new WaitForSeconds(time);
+        PlayerWins();
+        Destroy(gameObject, .1f);
+
     }
 
     void PlayerWins()

@@ -59,36 +59,42 @@ public class DamageController : MonoBehaviour
     void ResetColor()
     {
         StartCoroutine("EnableFlicker", flickerLength);
-        for (int i = 0; i < transform.childCount; i++)
+        if (gameObject != null)
         {
-            if (children[i].GetComponent<MeshRenderer>() != null)
+            for (int i = 0; i < transform.childCount; i++)
             {
-                children[i].GetComponent<MeshRenderer>().material.color = originalColor[i];
+                if (children[i]!= null && children[i].GetComponent<MeshRenderer>() != null)
+                {
+                    children[i].GetComponent<MeshRenderer>().material.color = originalColor[i];
+                }
             }
+            StartCoroutine("Flicker");
         }
-        StartCoroutine("Flicker");
     }
 
     IEnumerator Flicker()
     {
         while (flickerEnabled)
         {
-            for (int i = 0; i< transform.childCount; i++) 
+            if (gameObject != null)
             {
-                if(children[i].GetComponent<MeshRenderer>() !=null)
+                for (int i = 0; i < transform.childCount; i++)
                 {
-                    children[i].GetComponent<MeshRenderer>().material.color = Color.clear;
+                    if (children[i] != null && children[i].GetComponent<MeshRenderer>() != null)
+                    {
+                        children[i].GetComponent<MeshRenderer>().material.color = Color.clear;
+                    }
                 }
-            }
-            yield return new WaitForSeconds(0.02f);
-            for (int i = 0; i < transform.childCount; i++)
-            {
-                if (children[i].GetComponent<MeshRenderer>() != null)
+                yield return new WaitForSeconds(0.02f);
+                for (int i = 0; i < transform.childCount; i++)
                 {
-                    children[i].GetComponent<MeshRenderer>().material.color = originalColor[i];
+                    if (children[i]!=null && children[i].GetComponent<MeshRenderer>() != null)
+                    {
+                        children[i].GetComponent<MeshRenderer>().material.color = originalColor[i];
+                    }
                 }
+                yield return new WaitForSeconds(0.02f);
             }
-            yield return new WaitForSeconds(0.02f);
         }
     }
     IEnumerator EnableFlicker(float length)
