@@ -8,7 +8,6 @@ public class generateLineRenderer : MonoBehaviour
     private Vector3 startPos;
     private float endPos;
     private int maxLength = 10;
-    private float beamSpeed = 0.3f;
     private float finalWidth = 0.55f;
     private float widthSpeed = 0.001f;
     private EnemyControls enemyControls;

@@ -44,7 +44,6 @@ public class EnemyControls : MonoBehaviour
     private float takeDamageInvincibilityTime = 0.1f;
     private int damage;
     public bool isMoving = false;
-    private bool hasFired = false;
 
     public ParticleSystem deathParticles;
 

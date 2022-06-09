@@ -12,9 +12,11 @@ public class StatsOverlay : MonoBehaviour
     private int health;
     private int points;
     private int streak;
+    private int topStreak;
     private bool isHealth;
     private bool isStreak;
     private bool isPoints;
+    private bool isTopStreak;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +34,9 @@ public class StatsOverlay : MonoBehaviour
         else if (gameObject.name.Contains("Points"))
         {
             isPoints = true;
+        }else if (gameObject.name.Contains("TopStreak"))
+        {
+            isTopStreak = true;
         }
     }
 
@@ -52,6 +57,10 @@ public class StatsOverlay : MonoBehaviour
         {
             points = PlayerController.points;
             statsDisplay.text = points.ToString();
+        } else if (isTopStreak)
+        {
+            topStreak = PlayerController.topStreak;
+            statsDisplay.text = "Top Streak\n" +topStreak.ToString();
         }
     }
 

@@ -38,10 +38,15 @@ public class lineRendererAttack : MonoBehaviour
         {
             Vector3 rayStart = new Vector3(transform.position.x, player.position.y, transform.position.z);
             float maxDistance = Vector3.Distance(startPoint.position, endPoint.position);
+            Debug.DrawRay(new Vector3(transform.position.x,transform.position.y + 3, transform.position.z), transform.TransformDirection(Vector3.forward) * hit.distance, Color.white);
             if (Physics.Raycast(rayStart, transform.TransformDirection(Vector3.forward), out hit, maxDistance, 3))
             {
-                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.white);
-                playerController.TriggerHit(transform.parent.GetComponent<Collider>());
+                if (hit.collider)
+                {
+                    Debug.Log("HIT!");
+
+                    playerController.TriggerHit(player.transform.parent.GetComponent<Collider>());
+                }
             }
         }
 

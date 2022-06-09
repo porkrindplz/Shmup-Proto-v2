@@ -9,6 +9,7 @@ public class pauseMenu : MonoBehaviour
     public static bool isGameOver = false;
     public GameObject pauseMenuUI;
     public GameObject gameoverMenuUI;
+    public GameObject playUI;
     public static bool _levelComplete = false;
     public GameObject _levelCompleteMenu;
     private PlayerController playerController;
@@ -71,6 +72,7 @@ public class pauseMenu : MonoBehaviour
     public void Restart()
     {
         Time.timeScale = 1f;
+        PlayerController.restartCount++;
         SceneManager.LoadScene(1);
         Resume();
     }
@@ -78,7 +80,7 @@ public class pauseMenu : MonoBehaviour
     public void MainMenu()
     {
         Time.timeScale = 1f;
-        Debug.Log("Loading Menu");
+        PlayerController.restartCount = 0;
         SceneManager.LoadScene(0);
         isGameOver = false;
         _levelComplete = false;
@@ -87,13 +89,13 @@ public class pauseMenu : MonoBehaviour
 
     public void Quit()
     {
-        Debug.Log("Quit");
         Application.Quit();
     }
 
     void Complete()
     {
         _levelCompleteMenu.SetActive(true);
+        playUI.SetActive(false);
         playerController.isPlaying = false;
     }
 

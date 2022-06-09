@@ -41,18 +41,16 @@ public class fadeImage : MonoBehaviour
 
     private void Update()
     {
-
+        if (PlayerController.restartCount> 0 || fadeImg && img.color.a == 0)
+        {
+            Destroy(gameObject);
+        }
         if (fadeImg && img != null && !delay) {
             img.CrossFadeAlpha(alphaTarget, fadeSpeed, false);
         }
         if(fadeTxt && txt != null && !delay)
         {
             txt.CrossFadeAlpha(alphaTarget, fadeSpeed, false);
-        }
-
-        if(fadeImg && img.color.a == 0)
-        {
-            Destroy(gameObject);
         }
     }
 

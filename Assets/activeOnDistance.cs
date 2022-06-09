@@ -27,8 +27,7 @@ public class activeOnDistance : MonoBehaviour
         dist = Mathf.Abs(currentPos.z - targetPos.z);
         if(transform.position.y == 2.1f && !landingComplete)
         {
-            landingComplete = true;
-            Debug.Log("LANDING: " + true);   
+            landingComplete = true;   
         }
 
         if (dist <= triggerDistance && !bossController.enemyActive)
@@ -40,7 +39,6 @@ public class activeOnDistance : MonoBehaviour
         }
         if (landingComplete && countDown > 0)
         {
-            Debug.Log("COUNTDOWN");
             countDown -= Time.deltaTime;
 
         }else if (countDown <= 0 && anim.enabled == false)

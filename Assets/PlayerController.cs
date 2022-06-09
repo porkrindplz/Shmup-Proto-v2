@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
+    public static int restartCount;
     [SerializeField]
     public int startingHealth;
     [SerializeField]
@@ -12,7 +12,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     public static int points;
     [SerializeField]
+    private int initPoints = 0;
+    [SerializeField]
     public int streak;
+    public static int topStreak;
     [SerializeField]
     public float timer;
     [SerializeField]
@@ -71,6 +74,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        points = initPoints;
         invincible = true;
         ResetHealth();
         isPlaying = true;
@@ -88,6 +92,10 @@ public class PlayerController : MonoBehaviour
     {
         if (isPlaying)
         {
+            if (streak > topStreak)
+            {
+                topStreak = streak;
+            }
             //Game Timer
             timer += Time.deltaTime; 
 

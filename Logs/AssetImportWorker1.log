@@ -1,0 +1,167 @@
+Using pre-set license
+Built from '2021.1/staging' branch; Version is '2021.1.5f1 (3737af19df53) revision 3618735'; Using compiler version '192528614'; Build Type 'Release'
+OS: 'Windows 10 Pro; OS build 19044.1706; Version 2009; 64bit' Language: 'en' Physical Memory: 8109 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+ COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2021.1.5f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker1
+-projectPath
+C:/Users/mikez/Unity Projects/Shmup Proto v2
+-logFile
+Logs/AssetImportWorker1.log
+-srvPort
+58345
+Successfully changed project path to: C:/Users/mikez/Unity Projects/Shmup Proto v2
+C:/Users/mikez/Unity Projects/Shmup Proto v2
+Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 110.56 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2021.1.5f1 (3737af19df53)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.1.5f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/mikez/Unity Projects/Shmup Proto v2/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: Intel(R) Iris(R) Plus Graphics 640 (ID=0x5926)
+    Vendor:   Intel
+    VRAM:     4054 MB
+    Driver:   27.20.100.8682
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.1.5f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.1.5f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.1.5f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56764
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.1.5f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.003166 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 110.93 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.815 seconds
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.003545 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 115.73 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.423 seconds
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.10 seconds
+Refreshing native plugins compatible for Editor in 1.54 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4037 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 164.5 MB.
+System memory in use after: 162.0 MB.
+
+Unloading 45 unused Assets to reduce memory usage. Loaded Objects now: 4464.
+Total: 7.297400 ms (FindLiveObjects: 0.424100 ms CreateObjectMapping: 0.180400 ms MarkObjects: 3.454900 ms  DeleteObjects: 3.230700 ms)
+
+========================================================================
+Received Import Request.
+  path: Assets/Sound/72681__owyheesound__demolecularizing-beam(shrunk to 4.7sec).wav
+  artifactKey: Guid(e84ff4e6f9cf10849851a7f163db0e67) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sound/72681__owyheesound__demolecularizing-beam(shrunk to 4.7sec).wav using Guid(e84ff4e6f9cf10849851a7f163db0e67) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9b6c08c37033bf8706e808b8602dacf0') in 0.462417 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 286.487645 seconds.
+  path: Assets/Sound/585802__colorscrimsontears__squarewave-build-up(2sec).wav
+  artifactKey: Guid(2108ffeb2eeb10946b7efd86c817a594) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sound/585802__colorscrimsontears__squarewave-build-up(2sec).wav using Guid(2108ffeb2eeb10946b7efd86c817a594) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bb82fd79ba09715ab08003fe10ac6b86') in 0.068369 seconds 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003995 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.81 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.221 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 2.05 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3942 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 163.0 MB.
+System memory in use after: 160.5 MB.
+
+Unloading 40 unused Assets to reduce memory usage. Loaded Objects now: 4476.
+Total: 17.165700 ms (FindLiveObjects: 0.521200 ms CreateObjectMapping: 2.778900 ms MarkObjects: 6.904000 ms  DeleteObjects: 6.959700 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 1215.723795 seconds.
+  path: Assets/Sound/352852__jofae__game-style-laser-beam(RapidShot 2sec).wav
+  artifactKey: Guid(a9f41d163fc1975438aedf2d530a2915) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sound/352852__jofae__game-style-laser-beam(RapidShot 2sec).wav using Guid(a9f41d163fc1975438aedf2d530a2915) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8764eaea0fcf072232d793f8ed7fe521') in 0.066724 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 256.447108 seconds.
+  path: Assets/Sound/352852__jofae__game-style-laser-beam(RapidShot 3sec).wav
+  artifactKey: Guid(81eae2306b647d844bfda51f9df5a084) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sound/352852__jofae__game-style-laser-beam(RapidShot 3sec).wav using Guid(81eae2306b647d844bfda51f9df5a084) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '514467b2bd7d51617d10d1d6bd45a725') in 0.032622 seconds 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004007 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.86 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.147 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.84 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3942 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 163.0 MB.
+System memory in use after: 160.6 MB.
+
+Unloading 40 unused Assets to reduce memory usage. Loaded Objects now: 4480.
+Total: 5.672000 ms (FindLiveObjects: 0.559300 ms CreateObjectMapping: 0.387400 ms MarkObjects: 3.067700 ms  DeleteObjects: 1.655800 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 434.930388 seconds.
+  path: Assets/Sound/352852__jofae__game-style-laser-beam(RapidShot 3.5sec).wav
+  artifactKey: Guid(a2023f850eade4a4a9ae3031595304e9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sound/352852__jofae__game-style-laser-beam(RapidShot 3.5sec).wav using Guid(a2023f850eade4a4a9ae3031595304e9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c2f71548ae26ff035f84901b4e0999cd') in 0.076867 seconds 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003589 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.87 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.120 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 0.85 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3942 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 163.1 MB.
+System memory in use after: 160.6 MB.
+
+Unloading 40 unused Assets to reduce memory usage. Loaded Objects now: 4484.
+Total: 5.429000 ms (FindLiveObjects: 0.434900 ms CreateObjectMapping: 0.271200 ms MarkObjects: 3.208700 ms  DeleteObjects: 1.512400 ms)
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
